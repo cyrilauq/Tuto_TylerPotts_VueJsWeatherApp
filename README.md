@@ -3,6 +3,13 @@
 This project is a weather app, and will use the framework vue js. It will be based on a youtube tutorial (https://www.youtube.com/watch?v=JLc-hWsPTUY), that's not mine, and will certainly have some differencies regarding the code presented in the video.
 Note that, all the data here will be hardcoded.
 
+## API used
+
+In this projet I use 2 free tools: Current Weather Data(to get the weather information) and Open-Meteo Geocoding API(to get the geographical information of the city typed).
+You can find them here:
+- Current Weather Data => httphttps://openweathermap.org/current
+- Open-Meteo Geocoding API => https://open-meteo.com/en/docs/geocoding-api
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
