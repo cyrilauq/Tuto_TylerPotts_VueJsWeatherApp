@@ -13,14 +13,16 @@
     const query = ref('')
     const RESULT_COUNT_LIMIT = 1
     const weather = ref({})
+    var currentDate = moment().format('dddd DD MMMM YYYY')
     const cityInfos = ref(
         new CityInfos({
             lat: 0, 
             lon: 0, 
-            timezone : '',
+            timezone : 'Europe/London',
             name: 'London',
             countryCode: 'GB',
-            temp: 0
+            temp: 0,
+            weather: 'Rain'
         })
     )
 
@@ -38,10 +40,11 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data.results);
+                    console.log(data);
 
                     weather.value = data
                     cityInfos.value.temp = data.main.temp
+                    cityInfos.value.weather = data.weather[0].main
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -63,7 +66,7 @@
                     return response.json()
                 })
                 .then(data => {
-                    var result = new CityInfos({ lat: 0, lon: 0, timezone: '', name: '', countryCode: '', temp: 0 })
+                    var result = new CityInfos({ lat: 0, lon: 0, timezone: '', name: '', countryCode: '', temp: 0, weather: '' })
                     let results = data.results
                     if(results.length > 0) {
                         let first = results[0];
@@ -73,7 +76,8 @@
                             timezone: first.timezone,
                             name: first.name,
                             countryCode: first.country_code,
-                            temp: 0
+                            temp: 0,
+                            weather: ''
                         })
                     }
                     return result
@@ -99,14 +103,14 @@
                         {{ cityInfos.name }}, {{ cityInfos.countryCode }}
                     </div>
                     <div class="date">
-                        Monday 20 January 2020
+                        {{ currentDate }}
                     </div>
                     <div class="weather-box">
                         <div class="temp">
                             {{ cityInfos.temp }}°C
                         </div>
                         <div class="weather">
-                            Rain
+                            {{ cityInfos.weather }}
                         </div>
                     </div>
                 </div>

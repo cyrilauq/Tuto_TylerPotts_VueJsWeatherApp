@@ -7,6 +7,7 @@ class CityInfos {
     name: string
     countryCode: string 
     temp: number
+    weather: string
 
     constructor(object: { 
         lat: number, 
@@ -14,7 +15,8 @@ class CityInfos {
         timezone : string,
         name: string,
         countryCode: string,
-        temp: number
+        temp: number,
+        weather: string
     }) {
         this.lat = object.lat
         this.lon = object.lon
@@ -22,6 +24,7 @@ class CityInfos {
         this.name = object.name
         this.countryCode = object.countryCode
         this.temp = object.temp
+        this.weather = object.weather
     }
 
 }
