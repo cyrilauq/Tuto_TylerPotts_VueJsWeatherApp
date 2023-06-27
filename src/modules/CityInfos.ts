@@ -1,4 +1,4 @@
-export { CityInfos }
+export { CityInfos, getDefaultInfos, getEmptyInfos }
 
 class CityInfos {
     lat: number 
@@ -27,4 +27,28 @@ class CityInfos {
         this.weather = object.weather
     }
 
+}
+
+function getDefaultInfos(): CityInfos {
+    return new CityInfos({
+        lat: 0, 
+        lon: 0, 
+        timezone : 'Europe/London',
+        name: 'London',
+        countryCode: 'GB',
+        temp: 0,
+        weather: 'Rain'
+    })
+}
+
+function getEmptyInfos(): CityInfos {
+    return new CityInfos({
+        lat: 0, 
+        lon: 0, 
+        timezone : 'Europe/London',
+        name: 'London',
+        countryCode: 'GB',
+        temp: 0,
+        weather: 'Rain'
+    })
 }

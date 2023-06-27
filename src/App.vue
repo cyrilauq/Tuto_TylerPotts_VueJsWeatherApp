@@ -5,31 +5,18 @@
 
     // TODO: give a custom object to weather
 
-    import { CityInfos } from '@/modules/CityInfos'
+    import { CityInfos, getEmptyInfos, getDefaultInfos } from '@/modules/CityInfos'
 
-    const name = ref('app')
     const url_base = 'https://openweathermap.org/data/3.0/'
     const api_key = "54eba87b601fa33f3fc31c339939a1b8"
     const query = ref('')
     const RESULT_COUNT_LIMIT = 1
     const weather = ref({})
     var currentDate = moment().format('dddd DD MMMM YYYY')
-    const cityInfos = ref(
-        new CityInfos({
-            lat: 0, 
-            lon: 0, 
-            timezone : 'Europe/London',
-            name: 'London',
-            countryCode: 'GB',
-            temp: 0,
-            weather: 'Rain'
-        })
-    )
+    const cityInfos = ref(getDefaultInfos())
 
     async function fetchWeather(e: KeyboardEvent) {
         if(e.key === "Enter") {        
-            var searchDate = moment().format('YYYY-MM-DD')
-
             cityInfos.value = new CityInfos(await getCoordinates(query.value))
             
             fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${cityInfos.value.lat}&lon=${cityInfos.value.lon}&units=metric&appid=${api_key}`)
@@ -40,8 +27,6 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
-
                     weather.value = data
                     cityInfos.value.temp = data.main.temp
                     cityInfos.value.weather = data.weather[0].main
@@ -66,7 +51,7 @@
                     return response.json()
                 })
                 .then(data => {
-                    var result = new CityInfos({ lat: 0, lon: 0, timezone: '', name: '', countryCode: '', temp: 0, weather: '' })
+                    var result = new CityInfos(getEmptyInfos())
                     let results = data.results
                     if(results.length > 0) {
                         let first = results[0];
@@ -86,7 +71,7 @@
 </script>
 
 <template>
-    <div id="app">
+    <div id="app" :class="{ 'warm': (typeof cityInfos.weather != undefined && cityInfos.temp > 16) }">
         <main>
             <div class="search-box">
                 <input 
@@ -107,7 +92,7 @@
                     </div>
                     <div class="weather-box">
                         <div class="temp">
-                            {{ cityInfos.temp }}°C
+                            {{ Math.round(cityInfos.temp) }}°C
                         </div>
                         <div class="weather">
                             {{ cityInfos.weather }}
@@ -122,6 +107,11 @@
 <style scoped>
     #app {
         background-image: url('./assets/cold-bg.jpg');
+        background-position: bottom;
+        transition: .4s;
+    }
+    #app.warm {
+        background-image: url('./assets/warm-bg.jpg');
         background-position: bottom;
         transition: .4s;
     }

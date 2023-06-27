@@ -1,7 +1,14 @@
 # Tuto_TylerPotts_VueJsWeatherApp
 
-This project is a weather app, and will use the framework vue js. It will be based on a youtube tutorial (https://www.youtube.com/watch?v=JLc-hWsPTUY), that's not mine, and will certainly have some differencies regarding the code presented in the video.
-Note that, all the data here will be hardcoded.
+This project is a weather app, and will use the framework vue js. It will be based on a youtube tutorial (https://www.youtube.com/watch?v=JLc-hWsPTUY), that's not mine.
+To get the date of today I use the Moment JS library.
+
+## Install Moment JS library
+
+```sh
+yarn add moment
+```
+More information here: https://momentjs.com/
 
 ## API used
 
@@ -9,6 +16,14 @@ In this projet I use 2 free tools: Current Weather Data(to get the weather infor
 You can find them here:
 - Current Weather Data => httphttps://openweathermap.org/current
 - Open-Meteo Geocoding API => https://open-meteo.com/en/docs/geocoding-api
+
+## Unsing Current Weather Data
+
+To use this tool, you need to sign in or register on https://home.openweathermap.org.
+When it's done you have to generate a key and put your key here (after the equal)
+```sh
+    const api_key = "54eba87b601fa33f3fc31c339939a1b8"
+```
 
 ## Recommended IDE Setup
 
